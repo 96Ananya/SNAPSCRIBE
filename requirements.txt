@@ -2,7 +2,7 @@ Flask==3.0.3
 Pillow==10.4.0
 easyocr==1.7.1
 torch==2.9.0
-torchvision==0.16.0
+torchvision==0.24.0
 numpy
 opencv-python-headless
 gunicorn
