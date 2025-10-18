@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapScribe</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f4f4f4; }
+        h1 { text-align: center; color: #333; }
+        .module { background: white; padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        form { display: flex; flex-direction: column; }
+        input[type="file"], input[type="number"] { margin: 10px 0; padding: 8px; }
+        button { background: #007bff; color: white; padding: 10px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .flash { color: red; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>SnapScribe</h1>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <!-- Image Splitting Module -->
+    <div class="module">
+        <h2>1. Image Splitting Module</h2>
+        <p>Upload a grid image (e.g., 3x3) and split it into separate images. Download as ZIP.</p>
+        <form action="/split" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <label>Rows: <input type="number" name="rows" min="1" value="3" required></label>
+            <label>Columns: <input type="number" name="cols" min="1" value="3" required></label>
+            <button type="submit">Split & Download ZIP</button>
+        </form>
+    </div>
+    
+    <!-- OCR Module -->
+    <div class="module">
+        <h2>2. OCR Module</h2>
+        <p>Upload an image to extract text (printed or handwritten). View and download the result.</p>
+        <form action="/ocr" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">Extract Text</button>
+        </form>
+    </div>
+
+    <script>
+        // Basic JS for form validation (optional enhancement)
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                const fileInput = form.querySelector('input[type="file"]');
+                if (!fileInput.files[0]) {
+                    e.preventDefault();
+                    alert('Please select a file.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
