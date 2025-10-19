@@ -14,6 +14,7 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 OCR_API_KEY = "K88475158488957"
 OCR_API_URL = "https://api.ocr.space/parse/image"  # Example OCR API endpoint
 
+# Ensure upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 
@@ -30,11 +31,15 @@ def split_image():
         return redirect(request.url)
 
     file = request.files['image']
-    rows = int(request.form.get('rows', 1))
-    cols = int(request.form.get('cols', 1))
-
     if file.filename == '':
         flash('No selected file')
+        return redirect(request.url)
+
+    try:
+        rows = int(request.form.get('rows', 1))
+        cols = int(request.form.get('cols', 1))
+    except ValueError:
+        flash('Rows and Columns must be integers')
         return redirect(request.url)
 
     filename = secure_filename(file.filename)
