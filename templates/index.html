@@ -31,7 +31,7 @@
         <h2>1. Image Splitting Module</h2>
         <p>Upload a grid image (e.g., 3x3) and split it into separate images. Download as ZIP.</p>
         <form action="/split" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" accept="image/*" required>
+            <input type="file" name="image" accept="image/*" required>
             <label>Rows: <input type="number" name="rows" min="1" value="3" required></label>
             <label>Columns: <input type="number" name="cols" min="1" value="3" required></label>
             <button type="submit">Split & Download ZIP</button>
@@ -43,13 +43,13 @@
         <h2>2. OCR Module</h2>
         <p>Upload an image to extract text (printed or handwritten). View and download the result.</p>
         <form action="/ocr" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" accept="image/*" required>
+            <input type="file" name="image" accept="image/*" required>
             <button type="submit">Extract Text</button>
         </form>
     </div>
 
     <script>
-        // Basic JS for form validation (optional enhancement)
+        // Basic JS for form validation
         document.querySelectorAll('form').forEach(form => {
             form.addEventListener('submit', (e) => {
                 const fileInput = form.querySelector('input[type="file"]');
