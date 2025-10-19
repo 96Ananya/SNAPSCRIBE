@@ -1,9 +1,9 @@
 Flask==3.0.3
 Pillow==10.4.0
 easyocr==1.7.1
-torch==2.0.1+cpu
-torchvision==0.15.2+cpu
---extra-index-url https://download.pytorch.org/whl/cpu
-numpy==1.24.4 
-opencv-python-headless
-gunicorn
+torch==2.0.1
+torchvision==0.15.2
+opencv-python-headless==4.9.0.80
+numpy==1.26.4
+gunicorn==21.2.0
+Werkzeug==3.0.3
